@@ -24,122 +24,99 @@ export interface Country {
 // ─────────────────────────────────────────────
 export const library: Country[] = [
   {
-    slug: "norway",
-    name: "Norway",
-    coverImage: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&q=80",
-    description: "Chasing the Northern Lights through fjords and mountain passes.",
+    slug: "prague-budapest",
+    name: "Prague × Budapest",
+    // Uses your own video thumbnail as the cover
+    coverImage: "https://img.youtube.com/vi/0dQVq9pkR38/maxresdefault.jpg",
+    description: "Two of Central Europe's most cinematic capitals — gothic spires, river bridges, and old-world grandeur.",
     videos: [
       {
-        id: "norway-1",
-        title: "Geirangerfjord at Sunrise",
+        id: "prague-budapest-1",
+        title: "Prague × Budapest",
         source: "youtube",
-        videoId: "dQw4w9WgXcQ", // replace with your real YouTube video ID
-        location: "Geiranger",
-        date: "2024-06",
-        description: "Early morning mist rising over the iconic fjord.",
-      },
-      {
-        id: "norway-2",
-        title: "Lofoten Islands",
-        source: "vimeo",
-        videoId: "76979871", // replace with your real Vimeo video ID
-        location: "Lofoten",
-        date: "2023-08",
-        description: "Dramatic peaks and fishing villages of the Arctic archipelago.",
+        videoId: "0dQVq9pkR38",
+        location: "Prague & Budapest",
+        description: "A cinematic journey through the historic hearts of Prague and Budapest.",
       },
     ],
   },
   {
-    slug: "japan",
-    name: "Japan",
-    coverImage: "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800&q=80",
-    description: "Cherry blossoms, ancient temples, and volcanic peaks.",
+    slug: "taiwan",
+    name: "Taiwan",
+    coverImage: "https://img.youtube.com/vi/C_coChHDBX8/maxresdefault.jpg",
+    description: "Mountain temples, neon night markets, and lush green valleys across the island.",
     videos: [
       {
-        id: "japan-1",
-        title: "Mount Fuji Aerial",
+        id: "taiwan-1",
+        title: "Taiwan",
         source: "youtube",
-        videoId: "dQw4w9WgXcQ", // replace with your real YouTube video ID
-        location: "Fujikawaguchiko",
-        date: "2024-04",
-        description: "A slow orbit around Japan's iconic peak during golden hour.",
-      },
-      {
-        id: "japan-2",
-        title: "Kyoto Rice Fields",
-        source: "youtube",
-        videoId: "dQw4w9WgXcQ",
-        location: "Kyoto",
-        date: "2024-04",
-        description: "Terraced paddies glistening after the spring rains.",
+        videoId: "C_coChHDBX8",
+        location: "Taiwan",
+        description: "Exploring the dramatic landscapes and vibrant culture of Taiwan.",
       },
     ],
   },
   {
-    slug: "iceland",
-    name: "Iceland",
-    coverImage: "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=800&q=80",
-    description: "A road trip through glaciers, geysers, and black sand beaches.",
+    slug: "bali",
+    name: "Bali",
+    coverImage: "https://img.youtube.com/vi/2E0Y2KQ23E0/maxresdefault.jpg",
+    description: "Terraced rice fields, ocean cliffs, and the spiritual energy of the Island of the Gods.",
     videos: [
       {
-        id: "iceland-1",
-        title: "Skógafoss Waterfall",
-        source: "vimeo",
-        videoId: "76979871",
-        location: "South Iceland",
-        date: "2023-07",
-        description: "Flying through the spray of Iceland's most dramatic waterfall.",
+        id: "bali-1",
+        title: "Bali",
+        source: "youtube",
+        videoId: "2E0Y2KQ23E0",
+        location: "Bali, Indonesia",
+        description: "A cinematic look at Bali's iconic landscapes and hidden corners.",
       },
     ],
   },
   {
-    slug: "new-zealand",
-    name: "New Zealand",
-    coverImage: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=800&q=80",
-    description: "Rolling green hills, wild coastlines, and fiords that take your breath away.",
+    slug: "portugal",
+    name: "Portugal",
+    coverImage: "https://img.youtube.com/vi/Ukb-XOQVyD8/maxresdefault.jpg",
+    description: "Atlantic coastlines, golden hillside villages, and the warm light of Lisbon.",
     videos: [
       {
-        id: "nz-1",
-        title: "Milford Sound",
+        id: "portugal-1",
+        title: "Portugal",
         source: "youtube",
-        videoId: "dQw4w9WgXcQ",
-        location: "Fiordland",
-        date: "2024-01",
-        description: "Low cloud drifting through the world's most photographed fiord.",
+        videoId: "Ukb-XOQVyD8",
+        location: "Portugal",
+        description: "From the rugged Algarve cliffs to the terracotta rooftops of Lisbon.",
       },
     ],
   },
   {
-    slug: "morocco",
-    name: "Morocco",
-    coverImage: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&q=80",
-    description: "Wandering through ancient medinas, Sahara dunes, and Atlas Mountain villages.",
+    slug: "thailand",
+    name: "Thailand",
+    coverImage: "https://img.youtube.com/vi/iz8nY-L_bLA/maxresdefault.jpg",
+    description: "Ancient temple spires, emerald island waters, and the golden haze of Bangkok.",
     videos: [
       {
-        id: "morocco-1",
-        title: "Sahara at Dawn",
+        id: "thailand-1",
+        title: "Thailand",
         source: "youtube",
-        videoId: "dQw4w9WgXcQ",
-        location: "Merzouga",
-        date: "2023-11",
-        description: "Sand dunes casting long shadows at first light.",
+        videoId: "iz8nY-L_bLA",
+        location: "Thailand",
+        description: "Soaring over Thailand's iconic landscapes from north to south.",
       },
     ],
   },
   {
-    slug: "canada",
-    name: "Canada",
-    coverImage: "https://images.unsplash.com/photo-1507992781348-310259076fe0?w=800&q=80",
-    description: "From the turquoise lakes of the Rockies to the wilds of the north.",
+    slug: "japan-korea",
+    name: "Japan × Korea",
+    coverImage: "https://img.youtube.com/vi/8A3cYN-wM7w/maxresdefault.jpg",
+    description: "Cherry blossoms and neon streets — two countries, one unforgettable journey through East Asia.",
     videos: [
       {
-        id: "canada-1",
-        title: "Banff National Park",
+        id: "japan-korea-1",
+        title: "Japan × Korea",
         source: "youtube",
-        videoId: "dQw4w9WgXcQ",
-        location: "Alberta",
-        date: "2024-09",
-        description: "Turquoise glacial lakes surrounded by snow-capped peaks.",
+        videoId: "8A3cYN-wM7w",
+        location: "Japan & Korea",
+        description: "A dual-country film spanning the ancient and the ultra-modern across East Asia.",
       },
     ],
   },
@@ -161,9 +138,9 @@ export function getThumbnail(video: Video): string {
   return `https://vumbnail.com/${video.videoId}.jpg`;
 }
 
-export function getEmbedUrl(video: Video): string {
+export function getEmbedUrl(video: Video, autoplay = true): string {
   if (video.source === "youtube") {
-    return `https://www.youtube.com/embed/${video.videoId}?autoplay=1&rel=0&modestbranding=1`;
+    return `https://www.youtube.com/embed/${video.videoId}?autoplay=${autoplay ? 1 : 0}&rel=0&modestbranding=1`;
   }
-  return `https://player.vimeo.com/video/${video.videoId}?autoplay=1&title=0&byline=0&portrait=0`;
+  return `https://player.vimeo.com/video/${video.videoId}?autoplay=${autoplay ? 1 : 0}&title=0&byline=0&portrait=0`;
 }
