@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "About — Travel Films",
+  title: "About | Travel Films",
   description: "James is a Brooklyn-based videographer who captures honest moments from his travels around the world.",
 };
 
@@ -59,7 +59,7 @@ export default function AboutPage() {
           >
             <Image
               src="/james.jpg"
-              alt="James — Charles Bridge, Prague"
+              alt="James at Charles Bridge, Prague"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: "cover", objectPosition: "center top" }}
@@ -130,7 +130,7 @@ export default function AboutPage() {
                 }}
               >
                 Brooklyn-based amateur videographer with a passion for capturing
-                the world as it actually feels — not just how it looks.
+                the world as it actually feels, not just how it looks.
               </p>
 
               <p
@@ -156,7 +156,7 @@ export default function AboutPage() {
                   fontWeight: 300,
                 }}
               >
-                This library is a personal archive — no filters, no pretense.
+                This library is a personal archive. No filters, no pretense.
                 Just honest films from the road.
               </p>
             </div>

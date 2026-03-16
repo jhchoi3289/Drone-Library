@@ -18,7 +18,7 @@ export default function Navbar() {
         height: "56px",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
         background: "linear-gradient(to bottom, rgba(10,26,15,0.97) 0%, rgba(10,26,15,0) 100%)",
       }}
     >
@@ -58,18 +58,6 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Right side — subtle label */}
-      <span
-        style={{
-          fontSize: "0.6rem",
-          letterSpacing: "0.15em",
-          textTransform: "uppercase",
-          color: "var(--text-muted)",
-          opacity: 0.5,
-        }}
-      >
-        Personal Film Library
-      </span>
     </nav>
   );
 }

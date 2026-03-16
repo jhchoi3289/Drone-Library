@@ -1,5 +1,5 @@
 import { library } from "@/data/library";
-import CountryCard from "@/components/CountryCard";
+import CarouselStrip from "@/components/CarouselStrip";
 import Navbar from "@/components/Navbar";
 
 export default function HomePage() {
@@ -13,26 +13,13 @@ export default function HomePage() {
       <header
         style={{
           paddingTop: "120px",
-          paddingBottom: "64px",
+          paddingBottom: "56px",
           paddingLeft: "clamp(1rem, 5vw, 4rem)",
           paddingRight: "clamp(1rem, 5vw, 4rem)",
           maxWidth: "1400px",
           margin: "0 auto",
         }}
       >
-        <p
-          style={{
-            margin: 0,
-            fontSize: "0.65rem",
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            color: "var(--accent)",
-            fontWeight: 500,
-            marginBottom: "1rem",
-          }}
-        >
-          Personal Film Library
-        </p>
         <h1
           style={{
             margin: 0,
@@ -61,39 +48,18 @@ export default function HomePage() {
         </p>
       </header>
 
-      {/* Country grid */}
-      <main
+      {/* Divider */}
+      <div
         style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          padding: "0 clamp(1rem, 5vw, 4rem) 6rem",
+          height: "1px",
+          background: "var(--border)",
+          marginBottom: "2.5rem",
         }}
-      >
-        {/* Divider */}
-        <div
-          style={{
-            height: "1px",
-            background: "var(--border)",
-            marginBottom: "2.5rem",
-          }}
-        />
+      />
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
-            gap: "1px",
-            background: "var(--border)",
-            borderRadius: "4px",
-            overflow: "hidden",
-          }}
-        >
-          {library.map((country) => (
-            <div key={country.slug} style={{ background: "var(--bg)" }}>
-              <CountryCard country={country} />
-            </div>
-          ))}
-        </div>
+      {/* Carousel — full-width, edge-to-edge */}
+      <main style={{ paddingBottom: "6rem" }}>
+        <CarouselStrip />
       </main>
 
       {/* Footer */}
@@ -103,18 +69,16 @@ export default function HomePage() {
           padding: "1.5rem clamp(1rem, 5vw, 4rem)",
           maxWidth: "1400px",
           margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "0.5rem",
         }}
       >
-        <span style={{ fontSize: "0.7rem", color: "var(--text-muted)", letterSpacing: "0.1em" }}>
+        <span
+          style={{
+            fontSize: "0.7rem",
+            color: "var(--text-muted)",
+            letterSpacing: "0.1em",
+          }}
+        >
           TRAVEL FILMS
-        </span>
-        <span style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>
-          Personal Film Library
         </span>
       </footer>
     </>
