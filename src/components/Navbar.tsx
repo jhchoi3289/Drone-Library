@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
   return (
     <nav
       style={{
@@ -9,7 +14,7 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 50,
-        padding: "0 1.5rem",
+        padding: "0 clamp(1rem, 4vw, 2.5rem)",
         height: "56px",
         display: "flex",
         alignItems: "center",
@@ -17,26 +22,50 @@ export default function Navbar() {
         background: "linear-gradient(to bottom, rgba(10,26,15,0.97) 0%, rgba(10,26,15,0) 100%)",
       }}
     >
-      <Link
-        href="/"
-        style={{
-          fontSize: "0.75rem",
-          fontWeight: 600,
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: "var(--accent)",
-          textDecoration: "none",
-        }}
-      >
-        Travel Films
-      </Link>
+      {/* Left side — brand + About */}
+      <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+        <Link
+          href="/"
+          style={{
+            fontSize: "0.75rem",
+            fontWeight: 600,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "var(--accent)",
+            textDecoration: "none",
+          }}
+        >
+          Travel Films
+        </Link>
 
+        <Link
+          href="/about"
+          style={{
+            fontSize: "0.65rem",
+            fontWeight: 500,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: pathname === "/about" ? "var(--accent)" : "var(--text-muted)",
+            textDecoration: "none",
+            transition: "color 0.2s ease",
+            paddingBottom: "1px",
+            borderBottom: pathname === "/about"
+              ? "1px solid var(--accent)"
+              : "1px solid transparent",
+          }}
+        >
+          About
+        </Link>
+      </div>
+
+      {/* Right side — subtle label */}
       <span
         style={{
-          fontSize: "0.65rem",
+          fontSize: "0.6rem",
           letterSpacing: "0.15em",
           textTransform: "uppercase",
           color: "var(--text-muted)",
+          opacity: 0.5,
         }}
       >
         Personal Film Library
