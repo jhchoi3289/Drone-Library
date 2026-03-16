@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { Country } from "@/data/library";
 import { useState, useRef, useCallback } from "react";
 
@@ -9,11 +10,6 @@ interface Props {
   country: Country;
 }
 
-// Preview states:
-//  hidden  — iframe not in DOM, cover image shown
-//  enter   — iframe mounting, fading in (opacity 0 → 1)
-//  visible — iframe at full opacity, 15s timer running
-//  leave   — iframe fading out (opacity 1 → 0)
 type PreviewState = "hidden" | "enter" | "visible" | "leave";
 
 const FADE_MS = 600;
@@ -26,11 +22,14 @@ export default function CountryCard({ country }: Props) {
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const previewTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // First YouTube video in the list
   const featuredVideo = country.videos.find((v) => v.source === "youtube");
   const embedSrc = featuredVideo
     ? `https://www.youtube.com/embed/${featuredVideo.videoId}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=${featuredVideo.videoId}&enablejsapi=0`
     : null;
+
+  // Year + location label from first video
+  const firstVideo = country.videos[0];
+  const metaLabel = [firstVideo?.location, firstVideo?.year].filter(Boolean).join(" · ");
 
   const clearTimers = () => {
     if (fadeTimer.current) { clearTimeout(fadeTimer.current); fadeTimer.current = null; }
@@ -46,14 +45,10 @@ export default function CountryCard({ country }: Props) {
   const handleMouseEnter = useCallback(() => {
     setHovered(true);
     if (!embedSrc) return;
-
     clearTimers();
     setPreview("enter");
-
-    // After one frame, switch to visible so the opacity transition fires
     fadeTimer.current = setTimeout(() => {
       setPreview("visible");
-      // Auto-end after 15 s
       previewTimer.current = setTimeout(startLeave, PREVIEW_MS);
     }, 50);
   }, [embedSrc, startLeave]);
@@ -75,36 +70,43 @@ export default function CountryCard({ country }: Props) {
         display: "block",
         position: "relative",
         overflow: "hidden",
-        borderRadius: "4px",
-        aspectRatio: "16 / 10",
+        borderRadius: "3px",
+        aspectRatio: "16 / 9",
         textDecoration: "none",
         background: "var(--surface)",
         cursor: "pointer",
       }}
     >
-      {/* ── Cover image ── */}
-      <Image
-        src={country.coverImage}
-        alt={country.name}
-        fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      {/* ── Cover image with slow Framer Motion zoom ── */}
+      <motion.div
+        animate={{ scale: hovered && preview !== "visible" ? 1.07 : 1 }}
+        transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
         style={{
-          objectFit: "cover",
-          // Fade out image while video preview is visible
+          position: "absolute",
+          inset: 0,
           opacity: preview === "visible" ? 0 : 1,
-          transition: `opacity ${FADE_MS}ms ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease`,
-          transform: hovered ? "scale(1.06)" : "scale(1)",
-          filter: hovered && preview === "hidden" ? "brightness(0.55)" : "brightness(0.4)",
+          transition: `opacity ${FADE_MS}ms ease`,
         }}
-        priority={false}
-      />
+      >
+        <Image
+          src={country.coverImage}
+          alt={country.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          style={{
+            objectFit: "cover",
+            filter: hovered ? "brightness(0.5)" : "brightness(0.38)",
+            transition: "filter 0.5s ease",
+          }}
+          priority={false}
+        />
+      </motion.div>
 
       {/* ── YouTube preview iframe ── */}
       {isIframeMounted && embedSrc && (
         <div
           style={{
             position: "absolute",
-            // Expand slightly beyond the card to hide black letterbox bars
             inset: "-10%",
             opacity: iframeOpacity,
             transition: `opacity ${FADE_MS}ms ease`,
@@ -114,30 +116,25 @@ export default function CountryCard({ country }: Props) {
           <iframe
             src={embedSrc}
             allow="autoplay"
-            style={{
-              width: "100%",
-              height: "100%",
-              border: "none",
-              display: "block",
-            }}
+            style={{ width: "100%", height: "100%", border: "none", display: "block" }}
             tabIndex={-1}
             aria-hidden="true"
           />
         </div>
       )}
 
-      {/* ── Gradient overlay (always present for text legibility) ── */}
+      {/* ── Gradient overlay ── */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.05) 55%, transparent 100%)",
+            "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.05) 55%, transparent 100%)",
           pointerEvents: "none",
         }}
       />
 
-      {/* ── Country name + count ── */}
+      {/* ── Text ── */}
       <div
         style={{
           position: "absolute",
@@ -147,29 +144,32 @@ export default function CountryCard({ country }: Props) {
           padding: "1rem 1.25rem",
           display: "flex",
           flexDirection: "column",
-          gap: "0.25rem",
+          gap: "0.2rem",
           pointerEvents: "none",
         }}
       >
-        <span
-          style={{
-            fontSize: "0.6rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--accent)",
-            fontWeight: 500,
-          }}
-        >
-          {country.videos.length} {country.videos.length === 1 ? "film" : "films"}
-        </span>
+        {metaLabel && (
+          <span
+            style={{
+              fontSize: "0.58rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              fontWeight: 500,
+            }}
+          >
+            {metaLabel}
+          </span>
+        )}
         <h2
           style={{
             margin: 0,
             fontSize: "1.15rem",
-            fontWeight: 600,
+            fontWeight: 500,
             color: "var(--text)",
-            letterSpacing: "0.02em",
+            letterSpacing: "0.01em",
             lineHeight: 1.2,
+            fontFamily: "var(--font-cormorant), Georgia, serif",
           }}
         >
           {country.name}
@@ -181,9 +181,9 @@ export default function CountryCard({ country }: Props) {
         style={{
           position: "absolute",
           inset: 0,
-          borderRadius: "4px",
-          border: `1px solid ${hovered ? "rgba(212,184,150,0.3)" : "transparent"}`,
-          transition: "border-color 0.3s ease",
+          borderRadius: "3px",
+          border: `1px solid ${hovered ? "rgba(201,168,76,0.25)" : "transparent"}`,
+          transition: "border-color 0.4s ease",
           pointerEvents: "none",
         }}
       />

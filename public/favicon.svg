@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="4" fill="#0a1a0f"/>
+  <!-- Camera body -->
+  <rect x="4" y="11" width="24" height="16" rx="2.5" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+  <!-- Camera bump -->
+  <rect x="11" y="7" width="8" height="5" rx="1.5" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+  <!-- Lens -->
+  <circle cx="16" cy="19" r="4.5" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+  <!-- JC inside lens -->
+  <text x="16" y="22" text-anchor="middle" font-family="Georgia, serif" font-size="5.5" font-weight="400" letter-spacing="0.5" fill="#c9a84c">JC</text>
+</svg>

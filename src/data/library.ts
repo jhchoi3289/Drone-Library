@@ -4,29 +4,25 @@ export interface Video {
   id: string;
   title: string;
   source: VideoSource;
-  videoId: string; // YouTube video ID or Vimeo video ID
+  videoId: string;
   description?: string;
-  date?: string; // e.g. "2024-05"
-  location?: string; // specific city/region within the country
-  thumbnail?: string; // optional override; auto-generated if omitted
+  year?: number;
+  location?: string;
+  thumbnail?: string;
 }
 
 export interface Country {
-  slug: string; // URL-safe identifier, e.g. "japan"
+  slug: string;
   name: string;
-  coverImage: string; // path under /public or a remote URL
+  coverImage: string;
   description?: string;
   videos: Video[];
 }
 
-// ─────────────────────────────────────────────
-// ADD YOUR COUNTRIES AND VIDEOS HERE
-// ─────────────────────────────────────────────
 export const library: Country[] = [
   {
     slug: "prague-budapest",
     name: "Prague × Budapest",
-    // Uses your own video thumbnail as the cover
     coverImage: "https://img.youtube.com/vi/0dQVq9pkR38/maxresdefault.jpg",
     description: "Two of Central Europe's most cinematic capitals — gothic spires, river bridges, and old-world grandeur.",
     videos: [
@@ -35,6 +31,7 @@ export const library: Country[] = [
         title: "Prague × Budapest",
         source: "youtube",
         videoId: "0dQVq9pkR38",
+        year: 2024,
         location: "Prague & Budapest",
         description: "A cinematic journey through the historic hearts of Prague and Budapest.",
       },
@@ -51,6 +48,7 @@ export const library: Country[] = [
         title: "Taiwan",
         source: "youtube",
         videoId: "C_coChHDBX8",
+        year: 2023,
         location: "Taiwan",
         description: "Exploring the dramatic landscapes and vibrant culture of Taiwan.",
       },
@@ -67,6 +65,7 @@ export const library: Country[] = [
         title: "Bali",
         source: "youtube",
         videoId: "2E0Y2KQ23E0",
+        year: 2023,
         location: "Bali, Indonesia",
         description: "A cinematic look at Bali's iconic landscapes and hidden corners.",
       },
@@ -83,6 +82,7 @@ export const library: Country[] = [
         title: "Portugal",
         source: "youtube",
         videoId: "Ukb-XOQVyD8",
+        year: 2022,
         location: "Portugal",
         description: "From the rugged Algarve cliffs to the terracotta rooftops of Lisbon.",
       },
@@ -99,6 +99,7 @@ export const library: Country[] = [
         title: "Thailand",
         source: "youtube",
         videoId: "iz8nY-L_bLA",
+        year: 2023,
         location: "Thailand",
         description: "Soaring over Thailand's iconic landscapes from north to south.",
       },
@@ -115,6 +116,7 @@ export const library: Country[] = [
         title: "Japan × Korea",
         source: "youtube",
         videoId: "8A3cYN-wM7w",
+        year: 2024,
         location: "Japan & Korea",
         description: "A dual-country film spanning the ancient and the ultra-modern across East Asia.",
       },
@@ -122,9 +124,6 @@ export const library: Country[] = [
   },
 ];
 
-// ─────────────────────────────────────────────
-// HELPERS
-// ─────────────────────────────────────────────
 export function getCountry(slug: string): Country | undefined {
   return library.find((c) => c.slug === slug);
 }
@@ -134,7 +133,6 @@ export function getThumbnail(video: Video): string {
   if (video.source === "youtube") {
     return `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`;
   }
-  // Vimeo thumbnails require an API call; return a placeholder
   return `https://vumbnail.com/${video.videoId}.jpg`;
 }
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import VideoCard from "@/components/VideoCard";
+import FadeIn from "@/components/FadeIn";
 import type { Metadata } from "next";
 
 interface Props {
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const country = getCountry(slug);
   if (!country) return { title: "Not Found" };
   return {
-    title: `${country.name} — Travel Films`,
+    title: `${country.name} | Travel Films`,
     description: country.description ?? `Travel films from ${country.name}.`,
   };
 }
@@ -47,20 +48,18 @@ export default async function CountryPage({ params }: Props) {
           alt={country.name}
           fill
           priority
-          style={{ objectFit: "cover", filter: "brightness(0.35)" }}
+          style={{ objectFit: "cover", filter: "brightness(0.3)" }}
           sizes="100vw"
         />
-        {/* Top-to-bottom gradient so navbar is readable */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to bottom, rgba(10,26,15,0.5) 0%, rgba(10,26,15,0) 40%, rgba(10,26,15,0.9) 100%)",
+              "linear-gradient(to bottom, rgba(10,26,15,0.5) 0%, rgba(10,26,15,0) 40%, rgba(10,26,15,0.95) 100%)",
           }}
         />
 
-        {/* Hero text */}
         <div
           style={{
             position: "absolute",
@@ -72,7 +71,6 @@ export default async function CountryPage({ params }: Props) {
             margin: "0 auto",
           }}
         >
-          {/* Breadcrumb */}
           <div style={{ marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <Link
               href="/"
@@ -102,11 +100,12 @@ export default async function CountryPage({ params }: Props) {
           <h1
             style={{
               margin: 0,
-              fontSize: "clamp(2rem, 6vw, 4rem)",
-              fontWeight: 700,
+              fontSize: "clamp(2.5rem, 7vw, 5rem)",
+              fontWeight: 400,
               letterSpacing: "-0.02em",
               color: "var(--text)",
               lineHeight: 1,
+              fontFamily: "var(--font-cormorant), Georgia, serif",
             }}
           >
             {country.name}
@@ -137,27 +136,29 @@ export default async function CountryPage({ params }: Props) {
           padding: "2.5rem clamp(1rem, 5vw, 4rem) 6rem",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            gap: "1rem",
-            marginBottom: "2rem",
-            borderBottom: "1px solid var(--border)",
-            paddingBottom: "1rem",
-          }}
-        >
-          <span
+        <FadeIn>
+          <div
             style={{
-              fontSize: "0.65rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
+              display: "flex",
+              alignItems: "baseline",
+              gap: "1rem",
+              marginBottom: "2rem",
+              borderBottom: "1px solid var(--border)",
+              paddingBottom: "1rem",
             }}
           >
-            {country.videos.length} {country.videos.length === 1 ? "video" : "videos"}
-          </span>
-        </div>
+            <span
+              style={{
+                fontSize: "0.65rem",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "var(--text-muted)",
+              }}
+            >
+              {country.videos.length} {country.videos.length === 1 ? "film" : "films"}
+            </span>
+          </div>
+        </FadeIn>
 
         <div
           style={{
@@ -166,8 +167,10 @@ export default async function CountryPage({ params }: Props) {
             gap: "1.5rem",
           }}
         >
-          {country.videos.map((video) => (
-            <VideoCard key={video.id} video={video} />
+          {country.videos.map((video, i) => (
+            <FadeIn key={video.id} delay={i * 0.1}>
+              <VideoCard video={video} />
+            </FadeIn>
           ))}
         </div>
       </main>
@@ -179,11 +182,6 @@ export default async function CountryPage({ params }: Props) {
           padding: "1.5rem clamp(1rem, 5vw, 4rem)",
           maxWidth: "1400px",
           margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "0.5rem",
         }}
       >
         <Link
@@ -197,9 +195,6 @@ export default async function CountryPage({ params }: Props) {
         >
           ← All Trips
         </Link>
-        <span style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>
-          Personal Film Library
-        </span>
       </footer>
     </>
   );
