@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const BALI_VIDEO_ID = "2E0Y2KQ23E0";
+const HERO_VIDEO_ID = "Ukb-XOQVyD8"; // Portugal
 
 export default function HeroSection({ totalTrips, totalVideos }: { totalTrips: number; totalVideos: number }) {
   return (
@@ -29,7 +29,7 @@ export default function HeroSection({ totalTrips, totalVideos }: { totalTrips: n
         }}
       >
         <iframe
-          src={`https://www.youtube.com/embed/${BALI_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${BALI_VIDEO_ID}&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`}
+          src={`https://www.youtube.com/embed/${HERO_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO_ID}&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`}
           allow="autoplay; encrypted-media"
           style={{ width: "100%", height: "100%", border: "none" }}
           tabIndex={-1}
