@@ -149,7 +149,7 @@ export default function VideoCard({ video }: Props) {
                 {video.location}
               </span>
             )}
-            {video.date && (
+            {video.year && (
               <span
                 style={{
                   fontSize: "0.7rem",
@@ -157,7 +157,7 @@ export default function VideoCard({ video }: Props) {
                   letterSpacing: "0.05em",
                 }}
               >
-                {formatDate(video.date)}
+                {video.year}
               </span>
             )}
           </div>
