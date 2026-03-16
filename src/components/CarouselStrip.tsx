@@ -55,7 +55,7 @@ export default function CarouselStrip() {
         style={{
           display: "flex",
           width: "fit-content",
-          animation: `carouselRight ${library.length * 6}s linear infinite`,
+          animation: `carouselLeft ${library.length * 6}s linear infinite`,
         }}
       >
         {items.map((country, i) => (
@@ -73,9 +73,9 @@ export default function CarouselStrip() {
       </div>
 
       <style>{`
-        @keyframes carouselRight {
-          from { transform: translateX(-50%); }
-          to   { transform: translateX(0%); }
+        @keyframes carouselLeft {
+          from { transform: translateX(0%); }
+          to   { transform: translateX(-50%); }
         }
       `}</style>
     </div>
